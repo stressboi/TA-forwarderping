@@ -9,5 +9,14 @@ to change the interval (default is 300 seconds, or 5 minutes). (Be sure to copy 
 
 Restart forwarder, and UF will ping all hosts in the list and return simple line-by-line status in Splunk, such as this:
 
+![alt text](https://github.com/stressboi/TA-forwarderping/blob/main/ping_search.png?raw=true)
 
+Install it on multiple forwarders and distribute the pinglist to all, and you can get a view of host status from multiple
+points on your network. Or, distribute a different pinglist per forwarder, if you can only reach certain hosts from certain
+network boundaries. The data returned contains a "reporting_host" value for you to create the proper reports and dashboards.
+
+A simple example search and dashboard is included in the TA.
+
+brodsky@splunk.com
+18DEC2020
 
