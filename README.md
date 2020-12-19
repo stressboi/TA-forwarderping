@@ -18,5 +18,6 @@ network boundaries. The data returned contains a "reporting_host" value for you 
 A simple example search and dashboard is included in the TA.
 
 brodsky@splunk.com
+
 18DEC2020
 
