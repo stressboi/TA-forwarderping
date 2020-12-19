@@ -19,7 +19,7 @@ A simple example search and dashboard is included in the TA.
 
 Here are some additional viz options, all done with simple XML only:
 
-![alt text](https://github.com/stressboi/TA-forwarderping/blob/main/ping_search2.png?raw=true)
+![alt text](https://github.com/stressboi/TA-forwarderping/blob/main/ping_status2.png?raw=true)
 
 brodsky@splunk.com
 
