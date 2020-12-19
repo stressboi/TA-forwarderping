@@ -11,6 +11,7 @@
   </fieldset>
   <row>
     <panel>
+      <title>Basic Table</title>
       <table>
         <search>
           <query>index=main sourcetype="script:pinger" | stats latest(status) as Status,latest(_time) as time by target_host,reporting_host | eval time=strftime(time,"%m/%d/%y %H:%M:%S") | rename target_host as Target,reporting_host as "Reporting Host" | sort Target</query>
@@ -28,6 +29,82 @@
         <option name="wrap">true</option>
         <format type="color" field="Status">
           <colorPalette type="map">{"Success":#53A051,"Failed":#DC4E41}</colorPalette>
+        </format>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>Trellis Piecharts</title>
+      <chart>
+        <search>
+          <query>index=main sourcetype="script:pinger" | stats count by target_host, status | head 20</query>
+          <earliest>$field1.earliest$</earliest>
+          <latest>$field1.latest$</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="charting.axisLabelsX.majorLabelStyle.overflowMode">ellipsisNone</option>
+        <option name="charting.axisLabelsX.majorLabelStyle.rotation">0</option>
+        <option name="charting.axisTitleX.visibility">collapsed</option>
+        <option name="charting.axisTitleY.visibility">collapsed</option>
+        <option name="charting.axisTitleY2.visibility">collapsed</option>
+        <option name="charting.axisX.abbreviation">none</option>
+        <option name="charting.axisX.scale">linear</option>
+        <option name="charting.axisY.abbreviation">none</option>
+        <option name="charting.axisY.scale">linear</option>
+        <option name="charting.axisY2.abbreviation">none</option>
+        <option name="charting.axisY2.enabled">0</option>
+        <option name="charting.axisY2.scale">inherit</option>
+        <option name="charting.chart">pie</option>
+        <option name="charting.chart.bubbleMaximumSize">50</option>
+        <option name="charting.chart.bubbleMinimumSize">10</option>
+        <option name="charting.chart.bubbleSizeBy">area</option>
+        <option name="charting.chart.nullValueMode">gaps</option>
+        <option name="charting.chart.showDataLabels">none</option>
+        <option name="charting.chart.sliceCollapsingThreshold">0.01</option>
+        <option name="charting.chart.stackMode">default</option>
+        <option name="charting.chart.style">shiny</option>
+        <option name="charting.drilldown">none</option>
+        <option name="charting.fieldColors">{"Failed":#DC4E41,"Success":#53A051}</option>
+        <option name="charting.layout.splitSeries">0</option>
+        <option name="charting.layout.splitSeries.allowIndependentYRanges">0</option>
+        <option name="charting.legend.labelStyle.overflowMode">ellipsisMiddle</option>
+        <option name="charting.legend.mode">standard</option>
+        <option name="charting.legend.placement">none</option>
+        <option name="charting.lineWidth">2</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="trellis.enabled">1</option>
+        <option name="trellis.scales.shared">1</option>
+        <option name="trellis.size">small</option>
+      </chart>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>Fancy Sparkline Trends</title>
+      <table>
+        <search>
+          <query>index=main sourcetype="script:pinger" | eval numstatus=if(status=="Success",1,0) | stats sparkline(max(numstatus)) as trend by target_host,reporting_host | rename target_host as "Target",reporting_host as "Reporting Host" | sort Target</query>
+          <earliest>$field1.earliest$</earliest>
+          <latest>$field1.latest$</latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">20</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="refresh.display">progressbar</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+        <format field="trend" type="sparkline">
+          <option name="type">bar</option>
+          <option name="height">40px</option>
+          <option name="colorMap">
+            <option name="1:">#53A051</option>
+            <option name=":0">#DC4E41</option>
+          </option>
+          <option name="barWidth">5px</option>
         </format>
       </table>
     </panel>
