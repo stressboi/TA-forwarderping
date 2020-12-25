@@ -1,2 +1,3 @@
-pinger.bat: batch file that does the pinging
+pinger.bat: batch file that does the pinging on windows
+pinger.sh: same, but for Linux (shell script)
 pinglist.txt: enter hosts to ping, one per line
